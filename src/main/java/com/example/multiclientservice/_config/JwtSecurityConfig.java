@@ -91,14 +91,12 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
                 authorizeRequests().
-                antMatchers("/api/register").permitAll().
+                antMatchers("/api/signup").permitAll().
                 antMatchers("/api/authenticate").permitAll().
                 antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
-                antMatchers("/admin/**").hasRole("ADMIN").
-                antMatchers("/users/**").hasRole("USER").
-                antMatchers("/guest/**").hasRole("GUEST")
-                .anyRequest().authenticated();
-        //.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().httpBasic();
+                antMatchers("/merchant/**").hasRole("MERCHANT").
+                antMatchers("/customer/**").hasRole("CUSTOMER").
+                anyRequest().authenticated();
 
 
         //and()..sameOrigin().and().

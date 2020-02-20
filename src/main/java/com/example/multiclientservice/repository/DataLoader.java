@@ -35,8 +35,8 @@ public class DataLoader implements ApplicationRunner {
 
         List<Privilege> adminPrivileges = Arrays.asList(
                 readPrivilege, writePrivilege);
-        createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege, writePrivilege));
+        createRoleIfNotFound("ROLE_MERCHANT", adminPrivileges);
+        createRoleIfNotFound("ROLE_CUSTOMER", Arrays.asList(readPrivilege, writePrivilege));
     }
 
     @Transactional

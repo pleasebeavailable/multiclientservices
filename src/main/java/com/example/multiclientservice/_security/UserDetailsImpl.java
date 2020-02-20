@@ -58,8 +58,4 @@ public class UserDetailsImpl implements UserDetails {
     public String getEmail() {
         return user.getEmail();
     }
-
-    public boolean isMerchant() {
-        return user.isMerchant();
-    }
 }

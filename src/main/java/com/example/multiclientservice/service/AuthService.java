@@ -65,7 +65,7 @@ public class AuthService implements IAuthService {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(new JwtResponse(token, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.isMerchant(), roles));    }
+        return ResponseEntity.ok(new JwtResponse(token, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));    }
 
     @Override
     public ResponseEntity<?> register(SignUpRequest signUpRequest) {
@@ -77,7 +77,7 @@ public class AuthService implements IAuthService {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in user!"));
         }
         // Create user account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.isMerchant(), signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
         Role role = roleRepository.findByName(signUpRequest.getRole());
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(role);

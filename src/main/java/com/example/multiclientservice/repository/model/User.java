@@ -20,8 +20,7 @@ public class User {
     @Column(name = "email")
     private String email;
     
-    @Column(name = "merchant")
-    private boolean merchant;
+    public User() {}
 
     private int active;
 
@@ -34,11 +33,10 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public User(String username, boolean merchant, String email, String password) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.merchant = merchant;        
     }
 
     public long getId() {
@@ -59,14 +57,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isMerchant() {
-        return merchant;
-    }
-
-    public void setMerchant(boolean merchant) {
-        this.merchant = merchant;
     }
 
     public String getEmail() {
