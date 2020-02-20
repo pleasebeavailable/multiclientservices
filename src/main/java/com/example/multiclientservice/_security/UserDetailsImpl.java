@@ -55,5 +55,11 @@ public class UserDetailsImpl implements UserDetails {
         return user.getId();
     }
 
+    public String getEmail() {
+        return user.getEmail();
+    }
 
+    public boolean isAdmin() {
+        return user.isAdmin();
+    }
 }

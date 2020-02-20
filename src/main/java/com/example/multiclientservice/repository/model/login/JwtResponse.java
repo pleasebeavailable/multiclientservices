@@ -1,7 +1,5 @@
 package com.example.multiclientservice.repository.model.login;
 
-import com.example.multiclientservice.controller.dto.UserDto;
-
 import java.util.List;
 
 public class JwtResponse {
@@ -9,13 +7,15 @@ public class JwtResponse {
     private final String jwttoken;
     private Long id;
     private String username;
+    private String email;
     private boolean admin;
     private List<String> roles;
 
-    public JwtResponse(String jwttoken, Long id, String username, boolean admin, List<String> roles) {
+    public JwtResponse(String jwttoken, Long id, String username, String email, boolean admin, List<String> roles) {
         this.jwttoken = jwttoken;
         this.id = id;
         this.username = username;
+        this.email = email;
         this.admin = admin;
         this.roles = roles;
     }

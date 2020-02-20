@@ -17,6 +17,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "admin")
     private boolean admin;
 
@@ -30,6 +33,13 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
+
+    public User(String username, boolean admin, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.admin = admin;
+    }
 
     public long getId() {
         return id;
@@ -57,6 +67,14 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getActive() {

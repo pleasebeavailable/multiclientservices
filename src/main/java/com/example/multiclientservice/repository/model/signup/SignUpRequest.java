@@ -3,16 +3,14 @@ package com.example.multiclientservice.repository.model.signup;
 public class SignUpRequest {
 
     private String username;
-    private String firstName;
-    private String lastName;
+    private boolean admin;
     private String email;
     private String password;
     private String role;
 
-    public SignUpRequest(String username, String firstName, String lastName, String email, String password, String role) {
+    public SignUpRequest(String username, boolean admin, String email, String password, String role) {
         this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.admin = admin;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -22,16 +20,12 @@ public class SignUpRequest {
         return username;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
     public String getPassword() {

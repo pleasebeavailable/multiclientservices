@@ -1,6 +1,6 @@
 package com.example.multiclientservice.repository.model.signup;
 
-import com.example.multiclientservice.controller.dto.UserDto;
+import com.example.multiclientservice.web.dto.UserDto;
 
 public class MessageResponse {
 
