@@ -59,7 +59,7 @@ public class UserDetailsImpl implements UserDetails {
         return user.getEmail();
     }
 
-    public boolean isAdmin() {
-        return user.isAdmin();
+    public boolean isMerchant() {
+        return user.isMerchant();
     }
 }

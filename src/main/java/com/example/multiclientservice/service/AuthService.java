@@ -21,12 +21,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AuthService implements IAuthService {
 
     private AuthenticationManager authenticationManager;
@@ -36,7 +38,6 @@ public class AuthService implements IAuthService {
     private PasswordEncoder passwordEncoder;
     private MessageSource messageSource;
     private HttpServletRequest request;
-    private PrivilegeRepository privilegeRepository;
 
     @Autowired
     public AuthService(
@@ -51,7 +52,6 @@ public class AuthService implements IAuthService {
         this.passwordEncoder = passwordEncoder;
         this.messageSource = messageSource;
         this.request = request;
-        this.privilegeRepository = privilegeRepository;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class AuthService implements IAuthService {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(new JwtResponse(token, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.isAdmin(), roles));    }
+        return ResponseEntity.ok(new JwtResponse(token, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.isMerchant(), roles));    }
 
     @Override
     public ResponseEntity<?> register(SignUpRequest signUpRequest) {
@@ -77,7 +77,7 @@ public class AuthService implements IAuthService {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in user!"));
         }
         // Create user account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.isAdmin(), signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequest.getUsername(), signUpRequest.isMerchant(), signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
         Role role = roleRepository.findByName(signUpRequest.getRole());
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(role);

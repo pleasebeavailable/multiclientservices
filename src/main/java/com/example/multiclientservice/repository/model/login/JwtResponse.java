@@ -8,15 +8,15 @@ public class JwtResponse {
     private Long id;
     private String username;
     private String email;
-    private boolean admin;
+    private boolean merchant;
     private List<String> roles;
 
-    public JwtResponse(String jwttoken, Long id, String username, String email, boolean admin, List<String> roles) {
+    public JwtResponse(String jwttoken, Long id, String username, String email, boolean merchant, List<String> roles) {
         this.jwttoken = jwttoken;
         this.id = id;
         this.username = username;
         this.email = email;
-        this.admin = admin;
+        this.merchant = merchant;
         this.roles = roles;
     }
 
@@ -36,12 +36,12 @@ public class JwtResponse {
         return username;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public boolean isMerchant() {
+        return merchant;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setMerchant(boolean merchant) {
+        this.merchant = merchant;
     }
 
     public void setUsername(String username) {
