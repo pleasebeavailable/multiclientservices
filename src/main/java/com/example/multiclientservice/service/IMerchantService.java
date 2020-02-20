@@ -4,7 +4,11 @@ import com.example.multiclientservice.repository.model.Job;
 import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface IMerchantService {
+
+    List<Job> getAllJobs();
 
     Job getJob(long id) throws NotFoundException;
 

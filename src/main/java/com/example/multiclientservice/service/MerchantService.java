@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MerchantService implements IMerchantService {
 
     @Autowired
     private MerchantRepository merchantRepository;
 
+    @Override
+    public List<Job> getAllJobs() {
+        return merchantRepository.findAll();
+    }
 
     @Override
     public Job getJob(long id) throws NotFoundException {
