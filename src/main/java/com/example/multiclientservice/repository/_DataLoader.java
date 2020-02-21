@@ -13,12 +13,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
-public class DataLoader implements ApplicationRunner {
+public class _DataLoader implements ApplicationRunner {
     private RoleRepository roleRepository;
     private PrivilegeRepository privilegeRepository;
 
     @Autowired
-    public DataLoader(RoleRepository roleRepository, PrivilegeRepository privilegeRepository) {
+    public _DataLoader(RoleRepository roleRepository, PrivilegeRepository privilegeRepository) {
         this.roleRepository = roleRepository;
         this.privilegeRepository = privilegeRepository;
     }
@@ -36,7 +36,7 @@ public class DataLoader implements ApplicationRunner {
         List<Privilege> adminPrivileges = Arrays.asList(
                 readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_MERCHANT", adminPrivileges);
-        createRoleIfNotFound("ROLE_CUSTOMER", Arrays.asList(readPrivilege, writePrivilege));
+        createRoleIfNotFound("ROLE_CUSTOMER", adminPrivileges);
     }
 
     @Transactional

@@ -2,11 +2,14 @@ package com.example.multiclientservice.service;
 
 import com.example.multiclientservice.repository.MerchantRepository;
 import com.example.multiclientservice.repository.model.Job;
+import com.example.multiclientservice.web.dto.JobDto;
 import javassist.NotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,26 +18,39 @@ public class MerchantService implements IMerchantService {
     @Autowired
     private MerchantRepository merchantRepository;
 
+    ModelMapper modelMapper = new ModelMapper();
+
     @Override
-    public List<Job> getAllJobs() {
-        return merchantRepository.findAll();
+    public List<JobDto> getAllJobs() {
+        List<JobDto> jobDtos = new ArrayList<>();
+        for (Job job :
+                merchantRepository.findAll()) {
+            jobDtos.add(modelMapper.map(job, JobDto.class));
+        }
+        return jobDtos;
     }
 
     @Override
-    public Job getJob(long id) throws NotFoundException {
-        return merchantRepository.findById(id).orElseThrow(() -> new NotFoundException("Job with id: " + id + " was not found!"));
+    public JobDto getJob(long id) throws NotFoundException {
+        return modelMapper.map(merchantRepository.findById(id).orElseThrow(() -> new NotFoundException("Job with id: " + id + " was not found!")), JobDto.class);
     }
     @Override
-    public Job addJob(Job job) { //JobDto
-        return merchantRepository.save(job);
+    public JobDto addJob(Job job) { //JobDto
+        return modelMapper.map(merchantRepository.save(job), JobDto.class);
     }
 
     @Override
-    public Job editJob(long id, Job editedJob) throws NotFoundException {
+    public List<JobDto> addJobs(List<Job> jobs) {
+         //TODO
+        return null;
+    }
+
+    @Override
+    public JobDto editJob(long id, Job editedJob) throws NotFoundException {
         return merchantRepository.findById(id)
                 .map(job -> {
                     job.setName(editedJob.getName());
-                    return merchantRepository.save(job);
+                    return modelMapper.map(merchantRepository.save(job), JobDto.class);
                 }).orElseThrow(() -> new NotFoundException("Job with id: " + id + " was not found!"));
     }
 

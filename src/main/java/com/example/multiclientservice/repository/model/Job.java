@@ -1,17 +1,21 @@
 package com.example.multiclientservice.repository.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "jobs")
 public class Job {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "jobs",fetch = FetchType.LAZY)
+    private List<Purchase> purchases;
 
     public Job() {}
 
@@ -25,5 +29,13 @@ public class Job {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchase(List<Purchase> purchases) {
+        this.purchases = purchases;
     }
 }
