@@ -20,11 +20,9 @@ public class User {
     @Column(name = "email")
     private String email;
     
-    public User() {}
-
     private int active;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
@@ -32,6 +30,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
+
+    @OneToOne(mappedBy = "user")
+    private Job job;
+
+    public User() {}
 
     public User(String username, String email, String password) {
         this.username = username;

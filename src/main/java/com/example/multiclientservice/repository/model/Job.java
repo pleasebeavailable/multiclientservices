@@ -11,6 +11,10 @@ public class Job {
     @GeneratedValue
     private long id;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     @Column(name = "name")
     private String name;
 
@@ -29,6 +33,14 @@ public class Job {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Purchase> getPurchases() {

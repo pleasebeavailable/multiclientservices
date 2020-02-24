@@ -11,13 +11,15 @@ public interface IMerchantService {
 
     List<JobDto> getAllJobs();
 
+    List<JobDto> getAllMerchantJobs(long merchant_id);
+
     JobDto getJob(long id) throws NotFoundException;
 
-    JobDto addJob(Job job);
+    JobDto addJob(JobDto job);
 
-    List<JobDto> addJobs(List<Job> jobs);
+    List<JobDto> addJobs(List<JobDto> jobs);
 
     ResponseEntity<Object> deleteJob(long id) throws NotFoundException;
 
-    JobDto editJob(long id, Job job) throws NotFoundException;
+    JobDto editJob(long id, JobDto job) throws NotFoundException;
 }

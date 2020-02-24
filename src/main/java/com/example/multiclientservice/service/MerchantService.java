@@ -31,22 +31,34 @@ public class MerchantService implements IMerchantService {
     }
 
     @Override
+    public List<JobDto> getAllMerchantJobs(long merchant_id) {
+        List<JobDto> jobDtos = new ArrayList<>();
+        for (Job job :
+                merchantRepository.findJobsByMerchantId(merchant_id)) {
+            jobDtos.add(modelMapper.map(job, JobDto.class));
+        }
+        return jobDtos;
+    }
+
+    @Override
     public JobDto getJob(long id) throws NotFoundException {
         return modelMapper.map(merchantRepository.findById(id).orElseThrow(() -> new NotFoundException("Job with id: " + id + " was not found!")), JobDto.class);
     }
     @Override
-    public JobDto addJob(Job job) { //JobDto
+    public JobDto addJob(JobDto jobDto) {
+        Job job = new Job();
+        job.setName(jobDto.getName());
         return modelMapper.map(merchantRepository.save(job), JobDto.class);
     }
 
     @Override
-    public List<JobDto> addJobs(List<Job> jobs) {
+    public List<JobDto> addJobs(List<JobDto> jobs) {
          //TODO
         return null;
     }
 
     @Override
-    public JobDto editJob(long id, Job editedJob) throws NotFoundException {
+    public JobDto editJob(long id, JobDto editedJob) throws NotFoundException {
         return merchantRepository.findById(id)
                 .map(job -> {
                     job.setName(editedJob.getName());
