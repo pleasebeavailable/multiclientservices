@@ -5,6 +5,7 @@ import com.example.multiclientservice.web.dto.JobDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,8 +25,8 @@ public class MerchantController {
     public List<JobDto> getMerchantJobs(@PathVariable long merchant_id) {
         return merchantService.getAllMerchantJobs(merchant_id);
     }
-    @PostMapping("add")
-    public JobDto addNewJob(@RequestBody JobDto job) {
+    @PostMapping("addNewJob")
+    public JobDto addNewJob(@Valid @RequestBody JobDto job) {
         return merchantService.addJob(job);
     }
 

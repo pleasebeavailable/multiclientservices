@@ -93,8 +93,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 authorizeRequests().
                 antMatchers("/api/signup").permitAll().
                 antMatchers("/api/authenticate").permitAll().
-                antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
                 antMatchers("/merchant/allJobs").permitAll().
+                antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
                 antMatchers("/merchant/**").hasRole("MERCHANT").
                 antMatchers("/customer/**").hasRole("CUSTOMER").
                 anyRequest().authenticated();

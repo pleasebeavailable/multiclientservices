@@ -18,7 +18,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticateUser(@RequestBody JwtRequest authRequest) throws Exception {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest authRequest) throws Exception {
         return authService.authenticate(authRequest);
     }
 
