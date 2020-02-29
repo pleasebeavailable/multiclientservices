@@ -17,8 +17,6 @@ public interface IMerchantService {
 
     JobDto addJob(JobDto job);
 
-    List<JobDto> addJobs(List<JobDto> jobs);
-
     ResponseEntity<Object> deleteJob(long id) throws NotFoundException;
 
     JobDto editJob(long id, JobDto job) throws NotFoundException;

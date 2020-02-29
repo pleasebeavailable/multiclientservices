@@ -1,7 +1,9 @@
 package com.example.multiclientservice.service;
 
 import com.example.multiclientservice.repository.MerchantRepository;
+import com.example.multiclientservice.repository.UserRepository;
 import com.example.multiclientservice.repository.model.Job;
+import com.example.multiclientservice.repository.model.User;
 import com.example.multiclientservice.web.dto.JobDto;
 import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
@@ -17,6 +19,9 @@ public class MerchantService implements IMerchantService {
 
     @Autowired
     private MerchantRepository merchantRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     ModelMapper modelMapper = new ModelMapper();
 
@@ -44,17 +49,14 @@ public class MerchantService implements IMerchantService {
     public JobDto getJob(long id) throws NotFoundException {
         return modelMapper.map(merchantRepository.findById(id).orElseThrow(() -> new NotFoundException("Job with id: " + id + " was not found!")), JobDto.class);
     }
+
     @Override
     public JobDto addJob(JobDto jobDto) {
         Job job = new Job();
+        User user = userRepository.findById(jobDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("User with id: " + jobDto.getUserId() + " does not exist!"));
         job.setName(jobDto.getName());
+        job.setUser(user);
         return modelMapper.map(merchantRepository.save(job), JobDto.class);
-    }
-
-    @Override
-    public List<JobDto> addJobs(List<JobDto> jobs) {
-         //TODO
-        return null;
     }
 
     @Override
