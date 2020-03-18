@@ -41,6 +41,7 @@ public class MerchantService implements IMerchantService {
         List<Job> jobs = merchantRepository.findJobsByMerchantId(merchant_id);
         for (Job job : jobs) {
             JobDto jobDto = new JobDto();
+            jobDto.setId(job.getId());
             jobDto.setName(job.getName());
             jobDto.setUserId(job.getUser().getId());
             jobDtos.add(jobDto);
