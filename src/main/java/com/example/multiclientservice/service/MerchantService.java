@@ -38,9 +38,12 @@ public class MerchantService implements IMerchantService {
     @Override
     public List<JobDto> getAllMerchantJobs(long merchant_id) {
         List<JobDto> jobDtos = new ArrayList<>();
-        for (Job job :
-                merchantRepository.findJobsByMerchantId(merchant_id)) {
-            jobDtos.add(modelMapper.map(job, JobDto.class));
+        List<Job> jobs = merchantRepository.findJobsByMerchantId(merchant_id);
+        for (Job job : jobs) {
+            JobDto jobDto = new JobDto();
+            jobDto.setName(job.getName());
+            jobDto.setUserId(job.getUser().getId());
+            jobDtos.add(jobDto);
         }
         return jobDtos;
     }
