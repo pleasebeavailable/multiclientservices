@@ -18,10 +18,13 @@ public class Job {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "jobs",fetch = FetchType.LAZY)
+    private String category;
+
+    @ManyToMany(mappedBy = "jobs", fetch = FetchType.LAZY)
     private List<Purchase> purchases;
 
-    public Job() {}
+    public Job() {
+    }
 
     public long getId() {
         return id;
@@ -47,7 +50,15 @@ public class Job {
         return purchases;
     }
 
-    public void setPurchase(List<Purchase> purchases) {
+    public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

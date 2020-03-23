@@ -2,6 +2,7 @@ package com.example.multiclientservice.service;
 
 import com.example.multiclientservice.repository.model.Job;
 import com.example.multiclientservice.web.dto.JobDto;
+import com.example.multiclientservice.web.dto.JobDtoGui;
 import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 
@@ -15,9 +16,9 @@ public interface IMerchantService {
 
     JobDto getJob(long id) throws NotFoundException;
 
-    JobDto addJob(JobDto job);
+    JobDto addJob(JobDtoGui job);
 
     ResponseEntity<Object> deleteJob(long id) throws NotFoundException;
 
-    JobDto editJob(long id, JobDto job) throws NotFoundException;
+    JobDto editJob(long id, JobDtoGui job) throws NotFoundException;
 }

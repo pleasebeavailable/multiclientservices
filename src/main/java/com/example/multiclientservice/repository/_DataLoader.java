@@ -1,5 +1,6 @@
 package com.example.multiclientservice.repository;
 
+import com.example.multiclientservice.repository.model.Category;
 import com.example.multiclientservice.repository.model.Privilege;
 import com.example.multiclientservice.repository.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,15 @@ import java.util.List;
 public class _DataLoader implements ApplicationRunner {
     private RoleRepository roleRepository;
     private PrivilegeRepository privilegeRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public _DataLoader(RoleRepository roleRepository, PrivilegeRepository privilegeRepository) {
+    public _DataLoader(RoleRepository roleRepository, PrivilegeRepository privilegeRepository, CategoryRepository categoryRepository) {
         this.roleRepository = roleRepository;
         this.privilegeRepository = privilegeRepository;
+        this.categoryRepository = categoryRepository;
     }
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         loadData();
@@ -37,6 +41,18 @@ public class _DataLoader implements ApplicationRunner {
                 readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_MERCHANT", adminPrivileges);
         createRoleIfNotFound("ROLE_CUSTOMER", adminPrivileges);
+        createCategories();
+    }
+
+    @Transactional
+    public void createCategories() {
+        String name = "category ";
+
+        for (int i = 1; i < 6; i++) {
+            Category category = new Category();
+            category.setName(name + i);
+            categoryRepository.save(category);
+        }
     }
 
     @Transactional

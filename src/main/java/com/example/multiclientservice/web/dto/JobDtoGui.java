@@ -1,7 +1,7 @@
 package com.example.multiclientservice.web.dto;
 
 
-public class JobDto {
+public class JobDtoGui {
 
     private long id;
 
@@ -9,7 +9,7 @@ public class JobDto {
 
     private String name;
 
-    private CategoryDto category;
+    private String category;
 
     public long getId() {
         return id;
@@ -35,11 +35,11 @@ public class JobDto {
         this.name = name;
     }
 
-    public CategoryDto getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryDto category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }
