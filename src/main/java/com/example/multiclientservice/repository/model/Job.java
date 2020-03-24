@@ -1,7 +1,6 @@
 package com.example.multiclientservice.repository.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "jobs")
@@ -20,8 +19,8 @@ public class Job {
 
     private String category;
 
-    @ManyToMany(mappedBy = "jobs", fetch = FetchType.LAZY)
-    private List<Purchase> purchases;
+    @OneToOne(mappedBy = "jobs")
+    private Purchase purchase;
 
     public Job() {
     }
@@ -46,12 +45,12 @@ public class Job {
         this.user = user;
     }
 
-    public List<Purchase> getPurchases() {
-        return purchases;
+    public Purchase getPurchase() {
+        return purchase;
     }
 
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 
     public String getCategory() {

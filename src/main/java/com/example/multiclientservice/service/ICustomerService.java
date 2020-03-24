@@ -1,12 +1,12 @@
 package com.example.multiclientservice.service;
 
 import com.example.multiclientservice.web.dto.PurchaseDto;
-import com.example.multiclientservice.web.dto.PurchaseOrderDto;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.http.ResponseEntity;
 
 
 public interface ICustomerService {
 
-    PurchaseDto purchaseService(PurchaseOrderDto purchaseOrder);
+    ResponseEntity<Object> purchaseJob(PurchaseDto purchaseOrder) throws JsonProcessingException;
 
 }

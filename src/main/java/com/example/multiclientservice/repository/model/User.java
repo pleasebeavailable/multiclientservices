@@ -34,6 +34,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Job job;
 
+    @OneToOne(mappedBy = "user")
+    private Purchase purchase;
+
     public User() {}
 
     public User(String username, String email, String password) {
@@ -84,5 +87,21 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 }

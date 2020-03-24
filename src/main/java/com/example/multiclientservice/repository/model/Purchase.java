@@ -1,8 +1,6 @@
 package com.example.multiclientservice.repository.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "purchases")
@@ -12,13 +10,19 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "purchase_job",
-            joinColumns = @JoinColumn(name = "job_id"),
-            inverseJoinColumns = @JoinColumn(name = "purchase_id")
-    )
-    private List<Job> jobs;
+    @OneToOne
+    @JoinColumn(name = "job_id", referencedColumnName = "id")
+    private Job job;
+
+    @OneToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
+
+    @Column(name = "purchase_data")
+    private String purchaseData;
+
+    @Column(name = "address")
+    private String address;
 
     public Purchase() {
     }
@@ -27,15 +31,35 @@ public class Purchase {
         return id;
     }
 
-    public List<Job> getJobs() {
-        return jobs;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
-    public void addJob(Job job) {
-        this.getJobs().add(job);
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getPurchaseData() {
+        return purchaseData;
+    }
+
+    public void setPurchaseData(String purchaseData) {
+        this.purchaseData = purchaseData;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

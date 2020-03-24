@@ -1,19 +1,15 @@
 package com.example.multiclientservice.web.dto;
 
-
-import com.example.multiclientservice.repository.model.Job;
-import org.modelmapper.ModelMapper;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class PurchaseDto {
 
     private long id;
 
-    private List<JobDto> jobs = new ArrayList<>();
+    private String purchaseData;
 
-    public PurchaseDto() {}
+    private String address;
+
+    public PurchaseDto() {
+    }
 
     public long getId() {
         return id;
@@ -23,21 +19,19 @@ public class PurchaseDto {
         this.id = id;
     }
 
-    public List<JobDto> getJobs() {
-        return jobs;
+    public String getPurchaseData() {
+        return purchaseData;
     }
 
-    public void setJobs(List<Job> jobs) {
-        setJobDtos(jobs);
+    public void setPurchaseData(String purchaseData) {
+        this.purchaseData = purchaseData;
     }
 
-    private void setJobDtos(List<Job> jobs) {
-        jobs.forEach(job -> {
-            JobDto jobDto = new JobDto();
-            jobDto.setId(job.getId());
-            jobDto.setName(job.getName());
+    public String getAddress() {
+        return address;
+    }
 
-            this.jobs.add(jobDto);
-        });
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
