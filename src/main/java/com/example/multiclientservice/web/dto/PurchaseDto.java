@@ -8,6 +8,8 @@ public class PurchaseDto {
 
     private String address;
 
+    private JobDto jobDto;
+
     public PurchaseDto() {
     }
 
@@ -33,5 +35,13 @@ public class PurchaseDto {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public JobDto getJobDto() {
+        return jobDto;
+    }
+
+    public void setJobDto(JobDto jobDto) {
+        this.jobDto = jobDto;
     }
 }

@@ -19,9 +19,6 @@ public class Job {
 
     private String category;
 
-    @OneToOne(mappedBy = "jobs")
-    private Purchase purchase;
-
     public Job() {
     }
 
@@ -43,14 +40,6 @@ public class Job {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Purchase getPurchase() {
-        return purchase;
-    }
-
-    public void setPurchase(Purchase purchase) {
-        this.purchase = purchase;
     }
 
     public String getCategory() {

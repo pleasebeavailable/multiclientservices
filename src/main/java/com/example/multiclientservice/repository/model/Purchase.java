@@ -10,9 +10,8 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "job_id", referencedColumnName = "id")
-    private Job job;
+    @Column(name = "job_id")
+    private long jobId;
 
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
@@ -31,12 +30,12 @@ public class Purchase {
         return id;
     }
 
-    public Job getJob() {
-        return job;
+    public long getJobId() {
+        return jobId;
     }
 
-    public void setJob(Job job) {
-        this.job = job;
+    public void setJobId(long jobId) {
+        this.jobId = jobId;
     }
 
     public User getUser() {
