@@ -3,7 +3,6 @@ package com.example.multiclientservice.service;
 import com.example.multiclientservice.repository.CustomerRepository;
 import com.example.multiclientservice.repository.MerchantRepository;
 import com.example.multiclientservice.repository.UserRepository;
-import com.example.multiclientservice.repository.model.Job;
 import com.example.multiclientservice.repository.model.Purchase;
 import com.example.multiclientservice.repository.model.User;
 import com.example.multiclientservice.web.dto.JobDto;
@@ -25,6 +24,9 @@ public class CustomerService implements ICustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private MerchantRepository merchantRepository;
 
     @Autowired
     private MerchantService merchantService;
@@ -68,7 +70,7 @@ public class CustomerService implements ICustomerService {
         PurchaseData purchaseData = objectMapper.readValue(purchaseDto.getPurchaseData(), PurchaseData.class);
         User user = userRepository.findById(purchaseData.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found !"));
 
-        purchase.setJobId(purchaseData.getJobId());
+        purchase.setJob(merchantRepository.findById(purchaseData.getJobId()).orElseThrow(() -> new EntityNotFoundException("Job not found !")));
         purchase.setUser(user);
         purchase.setAddress(purchaseDto.getAddress());
         purchase.setPurchaseData(purchaseDto.getPurchaseData());

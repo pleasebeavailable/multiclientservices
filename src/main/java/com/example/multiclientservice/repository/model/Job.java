@@ -11,6 +11,10 @@ public class Job {
     private long id;
 
     @OneToOne
+    @JoinColumn(name = "purchaseId", referencedColumnName = "id")
+    private Purchase purchase;
+
+    @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
@@ -32,6 +36,14 @@ public class Job {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 
     public User getUser() {

@@ -1,5 +1,7 @@
 package com.example.multiclientservice.repository.model;
 
+import org.springframework.web.bind.annotation.GetMapping;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +12,9 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "job_id")
-    private long jobId;
+    @OneToOne
+    @JoinColumn(name = "jobId", referencedColumnName = "id")
+    private Job job;
 
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
@@ -30,12 +33,12 @@ public class Purchase {
         return id;
     }
 
-    public long getJobId() {
-        return jobId;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJobId(long jobId) {
-        this.jobId = jobId;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
     public User getUser() {
